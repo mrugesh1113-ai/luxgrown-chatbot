@@ -1,0 +1,11 @@
+﻿langchain==0.3.7
+langchain-community==0.3.7
+langchain-ollama==0.2.0
+chromadb==0.5.18
+streamlit==1.40.1
+fastapi==0.115.4
+uvicorn==0.32.0
+pypdf==5.1.0
+sentence-transformers==3.2.1
+pydantic==2.9.2
+fpdf2==2.7.9
