@@ -1,4 +1,5 @@
 import os
+import streamlit as st
 from langchain_community.embeddings import SentenceTransformerEmbeddings
 from langchain_community.vectorstores import Chroma
 from langchain_openai import ChatOpenAI
@@ -20,7 +21,11 @@ def load_qa_chain():
     embeddings = SentenceTransformerEmbeddings(model_name="all-MiniLM-L6-v2")
     vectorstore = Chroma(persist_directory=CHROMA_DB_PATH, embedding_function=embeddings)
     retriever = vectorstore.as_retriever(search_type="similarity", search_kwargs={"k": 4})
-    llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=0.3, openai_api_key=os.environ.get("OPENAI_API_KEY"))
+    try:
+        api_key = st.secrets["OPENAI_API_KEY"]
+    except Exception:
+        api_key = os.environ.get("OPENAI_API_KEY")
+    llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=0.3, openai_api_key=api_key)
     prompt = PromptTemplate(template=PROMPT_TEMPLATE, input_variables=["context", "question"])
     def format_docs(docs):
         return "\n\n".join(doc.page_content for doc in docs)
