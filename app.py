@@ -58,4 +58,4 @@ with st.sidebar:
     if st.button('Clear chat history'):
         st.session_state.messages = [{'role': 'assistant', 'content': 'Hello! What would you like to know about Lux Grown? 💎'}]
         st.rerun()
-    st.caption('Powered by Llama 3.2 | ChromaDB | LangChain')
+    st.caption('Powered by GPT-3.5-turbo | ChromaDB | LangChain')
