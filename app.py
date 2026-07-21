@@ -16,8 +16,9 @@ st.markdown('# 💎 Lux Grown Assistant')
 st.markdown('Ask me anything about our lab-grown diamond jewelry collection.')
 
 if not os.path.exists('chroma_db'):
-    st.error('No product data found. Please add PDFs to the docs folder and run: python ingest.py')
-    st.stop()
+    with st.spinner('Setting up...'):
+        from ingest import ingest_documents
+        ingest_documents()
 
 @st.cache_resource(show_spinner='Loading Lux Grown knowledge base...')
 def get_chain():
